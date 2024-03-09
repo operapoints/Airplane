@@ -5,20 +5,22 @@ from module1 import landing_gear
 
 lg = landing_gear()
 
-epsilon = 1e-4
-#t w L theta c
-bounds=[(epsilon/2,1e-2), #cap thickness
+print(lg)
+
+epsilon = 1e-3
+#t w L theta c lam
+bounds=[(epsilon/10,1e-2), #cap thickness
         (epsilon,10e-2), #width
         (epsilon,10e-1), #length
         (epsilon,math.pi/2), #angle with ground
         (epsilon,1e-1), #core thickness
-        (1,10) #taper ratio
+        (0.5,20) #taper ratio
         ]
 
 res = opt.shgo(
     lg.objective,
     bounds,
-    n=10000,
+    n=700,
     constraints=[
         {'type':'ineq','fun':lg.con1_max_stress},
         {'type':'ineq','fun':lg.con2_max_deflection},
